@@ -116,7 +116,7 @@ async function findOurComment(
         direction: 'desc',
       }
     )) {
-      const existing = response.data.find((c) =>
+      const existing = response.data.find((c: { body?: string | null }) =>
         c.body?.includes(COMMENT_MARKER)
       );
       if (existing) {

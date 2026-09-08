@@ -3,6 +3,7 @@ import * as core from '@actions/core';
 import * as fs from 'fs';
 import * as path from 'path';
 import AdmZip from 'adm-zip';
+import { DefaultArtifactClient } from '@actions/artifact';
 import { BundleStats } from './types';
 
 const ARTIFACT_NAME = 'bundle-stats';
@@ -26,9 +27,9 @@ function sleep(ms: number): Promise<void> {
 }
 
 async function retryOnFail<T>(
-  fn: () => Promise<T>,
+  fn: () => T,
   operation: string
-): Promise<T> {
+): Promise<Awaited<T>> {
   for (let attempt = 0; attempt < RETRY_COUNT; attempt++) {
     try {
       return await fn();
@@ -61,7 +62,6 @@ function toBuffer(data: unknown): Buffer {
 }
 
 export async function saveBaselineArtifact(stats: BundleStats): Promise<void> {
-  const { DefaultArtifactClient } = await import('@actions/artifact');
   const client = new DefaultArtifactClient();
   const tempDir = process.env.RUNNER_TEMP || '/tmp';
   const filePath = path.join(tempDir, STATS_FILE);
@@ -263,7 +263,7 @@ async function resolveWorkflowId(
   );
   const workflowName = github.context.workflow;
   const matches = workflows.data.workflows.filter(
-    (workflow) => workflow.name === workflowName
+    (workflow: { name: string; id: number }) => workflow.name === workflowName
   );
   if (matches.length === 0) {
     core.warning('Could not resolve workflow id for baseline lookup.');
