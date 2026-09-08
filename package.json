@@ -1,0 +1,69 @@
+{
+  "name": "build-size-diff",
+  "version": "1.2.0",
+  "description": "GitHub Action for bundle size tracking across any bundler (Vite, Webpack, Rollup, esbuild, Parcel)",
+  "main": "dist/index.cjs",
+  "scripts": {
+    "build": "ncc build src/index.ts -o dist --source-map --license licenses.txt && node scripts/postbuild.cjs",
+    "format": "prettier . --write",
+    "typecheck": "tsc --noEmit",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "github-actions",
+    "bundle-size",
+    "performance",
+    "ci-cd",
+    "vite",
+    "webpack",
+    "rollup",
+    "esbuild",
+    "parcel",
+    "nextjs",
+    "nuxt",
+    "astro",
+    "svelte",
+    "sveltekit",
+    "turbopack",
+    "rspack",
+    "monorepo",
+    "code-review",
+    "pull-request",
+    "pr-comment",
+    "gzip",
+    "brotli",
+    "compression",
+    "budget",
+    "size-limit",
+    "bundler-agnostic",
+    "performance-monitoring",
+    "frontend-tooling",
+    "build-tools",
+    "continuous-integration",
+    "developer-experience"
+  ],
+  "author": "step-security",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/step-security/build-size-diff.git"
+  },
+  "bugs": {
+    "url": "https://github.com/step-security/build-size-diff/issues"
+  },
+  "homepage": "https://github.com/step-security/build-size-diff#readme",
+  "dependencies": {
+    "@actions/artifact": "^2.0.0",
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^6.0.0",
+    "adm-zip": "^0.5.10",
+    "axios": "^1.20.0"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.0",
+    "@types/node": "^20.0.0",
+    "@vercel/ncc": "^0.38.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}
