@@ -1,6 +1,6 @@
 name: 'Build Size Diff'
 description: 'Track bundle size on push/PRs. Auto-comment with gzip/brotli metrics. Works with Vite, Webpack, Next.js, and more.'
-author: 'Giorgi Kishmareia'
+author: 'step-security'
 
 branding:
   icon: 'trending-up'
@@ -80,5 +80,5 @@ outputs:
     description: 'Status: pass, fail, no-baseline, or baseline-updated'
 
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'dist/index.cjs'

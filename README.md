@@ -35,8 +35,8 @@ jobs:
   size-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
       - uses: step-security/build-size-diff@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -253,7 +253,6 @@ dist-path: 'apps/web/dist'
 ```
 
 **Fork PRs not supported**
-See [Security Policy](SECURITY.md) for why and workarounds.
 
 ---
 
@@ -262,8 +261,6 @@ See [Security Policy](SECURITY.md) for why and workarounds.
 - **Same-repo PRs only** - Fork PRs require `pull_request_target` (security risk)
 - **Baseline retention** - GitHub artifacts expire based on repository settings
 - **JS/CSS files only** (including `.mjs`/`.cjs`) - Images, fonts, and other assets not tracked
-
-Need fork support? See [Security Policy](SECURITY.md).
 
 ---
 
@@ -276,7 +273,7 @@ Security considerations:
 - **Safe with `pull_request` trigger** - Workflow file comes from base branch
 - **Dangerous with `pull_request_target`** - Runs code from PR (including forks)
 
-Fork PRs are blocked by default. See [Security Policy](SECURITY.md) for details.
+Fork PRs are blocked by default.
 
 ---
 
@@ -289,11 +286,3 @@ Fork PRs are blocked by default. See [Security Policy](SECURITY.md) for details.
 - MIT licensed
 
 ---
-
-## Contributing
-
-Found a bug or have a feature request? [Open an issue](https://github.com/step-security/build-size-diff/issues).
-
-Built for developers who care about performance.
-
-**Built by [Giorgi Kishmareia](https://github.com/q1sh101)** · [Theatom.me](https://theatom.me)
