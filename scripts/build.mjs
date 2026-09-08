@@ -8,4 +8,7 @@ await build({
   outfile: 'dist/index.js',
   sourcemap: true,
   packages: 'bundle',
+  banner: {
+    js: "import { createRequire } from 'module';\nconst require = createRequire(import.meta.url);",
+  },
 });
