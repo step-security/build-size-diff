@@ -1,0 +1,84 @@
+name: 'Build Size Diff'
+description: 'Track bundle size on push/PRs. Auto-comment with gzip/brotli metrics. Works with Vite, Webpack, Next.js, and more.'
+author: 'Giorgi Kishmareia'
+
+branding:
+  icon: 'trending-up'
+  color: 'green'
+
+inputs:
+  build-command:
+    description: 'Build command to run'
+    required: false
+    default: 'npm run build'
+  build-timeout-minutes:
+    description: 'Max minutes to allow build to run before failing'
+    required: false
+    default: '15'
+  allow-unsafe-build:
+    description: 'Allow build execution on pull_request_target events (unsafe)'
+    required: false
+    default: 'false'
+  fail-on-stderr:
+    description: 'Fail build if stderr output is non-empty'
+    required: false
+    default: 'false'
+  dist-path:
+    description: 'Output directory to scan. If omitted, auto-detection is used (e.g., dist, build, out, .next)'
+    required: false
+  gzip:
+    description: 'Calculate gzip sizes'
+    required: false
+    default: 'true'
+  brotli:
+    description: 'Calculate brotli sizes'
+    required: false
+    default: 'true'
+  budget-max-increase-kb:
+    description: 'Maximum allowed size increase in KB (e.g., 10 or 0.5)'
+    required: false
+  warn-above-kb:
+    description: 'Warn if any file grows more than this KB (e.g., 50)'
+    required: false
+  fail-above-kb:
+    description: 'Fail if any file grows more than this KB (e.g., 100)'
+    required: false
+  comment-mode:
+    description: 'When to comment: always, on-increase, never'
+    required: false
+    default: 'always'
+  fail-on-comment-error:
+    description: 'Fail workflow if PR comment cannot be posted'
+    required: false
+    default: 'false'
+  skip-install:
+    description: 'Skip dependency installation (use if already installed)'
+    required: false
+    default: 'false'
+  github-token:
+    description: 'GitHub token for PR comments and artifact access'
+    required: true
+  max-artifact-pages:
+    description: 'Maximum number of artifact pages to search (100 artifacts per page). Prevents long searches in repos with many artifacts.'
+    required: false
+    default: '10'
+
+outputs:
+  total-size:
+    description: 'Total bundle size in bytes'
+  total-gzip:
+    description: 'Total gzip size in bytes'
+  total-brotli:
+    description: 'Total brotli size in bytes'
+  diff-size:
+    description: 'Size difference in bytes'
+  diff-gzip:
+    description: 'Gzip size difference in bytes'
+  diff-brotli:
+    description: 'Brotli size difference in bytes'
+  status:
+    description: 'Status: pass, fail, no-baseline, or baseline-updated'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.cjs'
